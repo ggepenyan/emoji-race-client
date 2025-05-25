@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { socket } from '../script.js';
+import { socket } from '../socket.js';
 
 export default function PanicButton() {
   const [visible, setVisible] = useState(false);
