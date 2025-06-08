@@ -13,7 +13,7 @@ export default function PanicButton() {
 
       setRace(race.id);
       setVisible(true);
-      setTimeout(() => setVisible(false), 3000);
+      setTimeout(() => setVisible(false), 1700);
     });
     return () => socket.off('showPanic');
   }, []);
