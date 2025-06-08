@@ -16,14 +16,19 @@ export default function Track() {
   const [race, setRace] = useState(null);
   const [winner, setWin] = useState(null);
   const pxPerTile = trackW / 30;
-  
+
   useEffect(() => {
     socket.emit('joinRace', { raceId: id, emoji });
   }, [id, emoji]);
 
   useEffect(() => {
     socket.on('state', setRace);
-    socket.on('raceFinished', ({ winnerId }) => setWin(winnerId));
+    socket.on('raceFinished', (race) => {
+      if (!race?.winnerId) {
+        return;
+      }
+      setWin(race.winnerId);
+    });
     return () => {
       socket.off('state').off('raceFinished');
     };
@@ -98,7 +103,7 @@ export default function Track() {
           </div>
         ))}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-4">
         <TapButton />
         <PanicButton />
       </div>

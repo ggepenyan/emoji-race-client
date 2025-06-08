@@ -6,8 +6,12 @@ export default function PanicButton() {
   const [raceId, setRace] = useState(null);
 
   useEffect(() => {
-    socket.on('showPanic', ({ raceId }) => {
-      setRace(raceId);
+    socket.on('showPanic', (race) => {
+      if (!race?.id || race.panicUsed || !race.applyPanic) {
+        return;
+      }
+
+      setRace(race.id);
       setVisible(true);
       setTimeout(() => setVisible(false), 3000);
     });

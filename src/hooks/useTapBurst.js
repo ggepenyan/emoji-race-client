@@ -12,8 +12,7 @@ export default function useTapBurst(raceId, tapButtonRef) {
 
     tapButtonRef.current.addEventListener('mousedown', inc);
     tapButtonRef.current.addEventListener('touchstart', inc);
-    console.log(tapButtonRef, 'tapButtonRef');
-    
+
     const t = setInterval(() => {
       if (pending.current > 0) {
         socket.emit('tapBurst', { raceId, d: pending.current });
